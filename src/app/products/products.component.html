@@ -1,0 +1,92 @@
+<section>
+     <div id="page-wrapper" class="sign-in-wrapper">
+       <div class="graphs">
+
+         <div class="clearfix"></div>
+
+         <div class="container-note">
+
+           <div class="modal fade" tabindex="-1" role="dialog" id= "modal" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+             <div class="modal-dialog modal-lg">
+               <div class="modal-content">
+
+                 <div class="post-ad-form">
+                   <form [formGroup]="rForm" (ngSubmit)="edit(rForm.value)">
+                     <div  *ngIf="editCode === 200 "  class="alert alert-success text-center col-md-12">{{responseCode}}</div>
+
+                     <div class="clearfix"></div>
+
+                     <label>Category</label>
+                     <input type="text" class="phone" placeholder="Name of the Category" required=" " formControlName="category" [ngClass]="{ 'is-invalid': submitted && rForm.controls['category'].errors }" [(ngModel)]="category">
+
+                     <div class="clearfix"></div>
+
+                     <label>Product</label>
+                     <input type="text" class="phone" placeholder="Name of the Product" required=" " formControlName="product" [ngClass]="{ 'is-invalid': submitted && rForm.controls['product'].errors }" [(ngModel)]="product">
+
+
+                      <div class="clearfix"></div>
+
+                     <input type="submit" [disabled]="loading" value="Edit">
+                     <div class="text-right col-md-12">
+                       <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                       </div>
+                     <div class="clearfix"></div>
+                   </form>
+                 </div>
+
+               </div>
+             </div>
+           </div>
+
+          <div  *ngIf="code === 400 "  class="alert alert-danger text-center col-md-12">{{response}}</div>
+          <div  *ngIf="code === 200 "  class="alert alert-success text-center col-md-12">{{response}}</div>
+
+
+            <table class="table table-striped" [mfData]="active" #mf="mfDataTable" [mfRowsOnPage]="10">
+			    <thead>
+			    <tr>
+			        <th style="width: 17%">
+			            <mfDefaultSorter by="date">Date Created</mfDefaultSorter>
+			        </th>
+			        <th style="width: 17%">
+			            <mfDefaultSorter by="itemid">Name</mfDefaultSorter>
+			        </th>
+			        <th style="width: 17%">
+			            <mfDefaultSorter by="type">Category</mfDefaultSorter>
+			        </th>
+              <th style="width: 17%">
+			            <mfDefaultSorter by="itemid">Edit</mfDefaultSorter>
+			        </th>
+			        <th style="width: 17%">
+			            <mfDefaultSorter by="type">Delete</mfDefaultSorter>
+			        </th>
+			    </tr>
+			    </thead>
+			    <tbody>
+			    <tr *ngFor="let item of mf.data">
+  		    		<td>{{item.dateCreated}}</td>
+  		    		<td>{{item.name}}</td>
+			        <td>{{item.category}}</td>
+					<td>
+						<a type="adprice" data-toggle="modal" data-target="#modal" (click)="openModal(item.name)">Edit</a>
+					</td>
+          <td>
+						<a type="adprice" (click)="delete(item.name)">Delete</a>
+					</td>
+
+			    </tr>
+			    </tbody>
+			    <tfoot>
+			    <tr>
+			        <td colspan="4">
+			            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+			        </td>
+			    </tr>
+			    </tfoot>
+			</table>
+         </div>
+
+       </div>
+     </div>
+   </section>

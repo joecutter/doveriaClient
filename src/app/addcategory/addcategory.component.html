@@ -1,0 +1,29 @@
+<!-- Submit Category -->
+<div class="submit-ad main-grid-border">
+  <div class="container">
+    <h2 class="head">Add a Category</h2>
+    <div class="post-ad-form">
+      <form [formGroup]="rForm" (ngSubmit)="addCategory(rForm.value)">
+
+        <div  *ngIf="code === '300' " class="alert alert-danger text-center col-md-12">{{response}}</div>
+        <div  *ngIf="code === '400' "  class="alert alert-danger text-center col-md-12">{{response}}</div>
+        <div  *ngIf="code === '200' "  class="alert alert-success text-center col-md-12">{{response}}</div>
+
+        <div class="clearfix"></div>
+
+        <label>Category Name <span>*</span></label>
+        <input type="text" class="phone" placeholder="Name of the Category" required=" " formControlName="title" [ngClass]="{ 'is-invalid': submitted && rForm.controls['title'].errors }">
+        <div class="text-center col-md-12">
+            <div *ngIf="!rForm.controls['title'].valid && rForm.controls['title'].touched || submitted && rForm.controls['title'].errors && rForm.controls['title'].errors.required" class="alert1">Category is Required!</div>
+           </div>
+
+        <div class="clearfix"></div>
+        <input type="submit" [disabled]="loading" value="Post">
+        <div class="text-right col-md-12">
+          <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+          </div>
+				<div class="clearfix"></div>
+      </form>
+    </div>
+  </div>
+</div>
